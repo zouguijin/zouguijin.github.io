@@ -1,4 +1,4 @@
-title: First Try on Typora
+title: Typora——Markdown编辑界的极简主义
 
 date: 2017/2/17 09:00:00
 
@@ -12,10 +12,6 @@ tags:
 - Markdown Editor
 
 ---
-
-
-
-# Typora初探
 
 ### Before Typora
 
