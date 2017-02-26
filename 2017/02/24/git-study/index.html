@@ -55,7 +55,7 @@
 </li>
 <li><p>如果已经向本地版本库提交了不合适的修改并想要撤销时，需要<a href="#versionback">版本回退</a>操作，前提是还没有推送到远程仓库。</p>
 </li>
-<li><p>若要删除一个文件，需要在工作区和版本库中同时删除该文件 <code>git rm &lt;file&gt;</code> ，并在删除完成后重新提交<code>git commit -m &lt;file&gt;</code> 一次：</p>
+<li><p>若要删除<span id="local-delete"></span>一个文件，需要在工作区和版本库中同时删除该文件 <code>git rm &lt;file&gt;</code> ，并在删除完成后重新提交<code>git commit -m &lt;file&gt;</code> 一次：</p>
 </li>
 <li><p>若在工作区错删了文件，则可以借助版本库，将该文件恢复到最新一次提交的状态：<code>git checkout -- &lt;file&gt;</code> <em>（当然，如果回收站还没清空的话，也可以去回收站看看）</em>；</p>
 </li>
@@ -68,7 +68,7 @@
 <h4 id="添加远程库与推送Push"><a href="#添加远程库与推送Push" class="headerlink" title="添加远程库与推送Push"></a>添加远程库与推送Push</h4><p>在完成Github注册和SSH Key添加之后，就可以在Github上创建一个新的Git仓库，然后根据相应的提示，将本地仓库的文件推送（Push）到远程仓库中。</p>
 <ul>
 <li><code>git remote add origin &lt;仓库地址&gt;</code> ，在本地仓库目录下执行，将本地仓库与远程仓库进行关联，同时为远程仓库定义了新的名字<code>origin</code> ，当然也可以使用别的名字；</li>
-<li><code>git push -u origin master</code> ，将本地仓库的内容推送到远成仓库，实际上是将当前分支<code>master</code> 的内容推送到远程仓库的<code>master</code> 分支，由于刚开始远程仓库是空的，所以第一次推送的时候，需要参数<code>-u</code> ，这样在推送的同时，还会建立起本地分支<code>master</code> 和远程仓库中<code>master</code> 分支的联系，以后推送和拉取内容就可以简化命令，即<code>git push origin master</code> 和</li>
+<li><code>git push -u origin master</code> ，将本地仓库的内容推送到远成仓库，实际上是将当前分支<code>master</code> 的内容推送到远程仓库的<code>master</code> 分支，由于刚开始远程仓库是空的，所以第一次推送的时候，需要参数<code>-u</code> ，这样在推送的同时，还会建立起本地分支<code>master</code> 和远程仓库中<code>master</code> 分支的联系，以后推送和拉取内容就可以简化命令，即<code>git push origin master</code> 和<code>git pull</code> 。</li>
 </ul>
 <h4 id="从远程库克隆Clone"><a href="#从远程库克隆Clone" class="headerlink" title="从远程库克隆Clone"></a>从远程库克隆Clone</h4><ul>
 <li><p><code>git clone https://github.com/zouguijin/docSync.git</code> </p>
@@ -77,6 +77,14 @@
 <p>Git支持多种协议，默认的git（所使用的是ssh协议），此外还可以使用https协议（但是https协议有时候比较慢，而且每次推送都需要输入口令，使用ssh就不需要输入口令，<code>get clone</code> 的时候都要口令…）。</p>
 </li>
 </ul>
+<h4 id="远程仓库文件的删除"><a href="#远程仓库文件的删除" class="headerlink" title="远程仓库文件的删除"></a>远程仓库文件的删除</h4><p>在<a href="#local-delete">管理与修改、删除</a> 部分，讲述了本地工作区和本地仓库文件的删除方法。若希望删除远程库中的文件，需要：</p>
+<ol>
+<li><p>进入与远程库相对应的本地仓库，切换到相应的分支，或者建立本地分支与远程分支的连接，然后通过<code>git pull</code> 将远程库的内容抓取到本地库中；</p>
+</li>
+<li><p>将不需要的内容在本地仓库中删除，然后再次添加<code>git add .</code> ，提交<code>git commit -m &quot;...&quot;</code> ，并最后推送到远程仓库覆盖原内容即可<code>git push origin branch</code> 。</p>
+<p><strong>注</strong> ：如果上一个提交者不是当前机器，则不能直接在本地修改然后推送，会出现冲突，否则可以直接修改并推送。</p>
+</li>
+</ol>
 <h3 id="分支（Branch）"><a href="#分支（Branch）" class="headerlink" title="分支（Branch）"></a>分支（Branch）</h3><p>创建属于自己的分支，其他人是看不到的，一个未完成的项目可以在分支上不断更新，直到完成之后再一次提交到<code>master</code> 主分支上。</p>
 <h4 id="创建与合并"><a href="#创建与合并" class="headerlink" title="创建与合并"></a>创建与合并</h4><ul>
 <li><p>原理：</p>
