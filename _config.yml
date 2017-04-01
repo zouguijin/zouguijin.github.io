@@ -74,4 +74,4 @@ deploy:
   branch: master
 
 # Favicon
-favicon: /favicon16.ico
+# favicon: /favicon16.ico
