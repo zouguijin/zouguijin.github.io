@@ -9,7 +9,7 @@ catergories:
 tags:
 
 - leetcode
-- recursive algorithms
+- recursive algorithm
 - linkedlist
 
 ---
