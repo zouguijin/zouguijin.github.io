@@ -72,3 +72,6 @@ deploy:
   type: git
   repo: https://github.com/zouguijin/zouguijin.github.io.git
   branch: master
+
+# Favicon
+favicon: /favicon16.ico
