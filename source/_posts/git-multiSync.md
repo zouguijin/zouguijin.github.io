@@ -2,7 +2,7 @@ title: Github Pages+hexo博客的创建与多机更新博客的实现
 
 date: 2017/2/26 19:00:00
 
-catergories:
+categories:
 
 - Study
 

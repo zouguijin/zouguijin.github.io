@@ -2,7 +2,7 @@ title: Git Study
 
 date: 2017/02/24 00:00:00
 
-catagories:
+categories:
 
 - Study
 

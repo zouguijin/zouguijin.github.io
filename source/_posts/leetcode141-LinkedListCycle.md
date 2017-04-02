@@ -1,6 +1,6 @@
 title: leetcode141 LinkedListCycle
 
-catergories:
+categories:
 
 - Study
 

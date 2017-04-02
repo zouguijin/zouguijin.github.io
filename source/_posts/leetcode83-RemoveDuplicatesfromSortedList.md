@@ -2,7 +2,7 @@ title: leetcode83  Remove Duplicates from Sorted List & VS leetcode#21
 
 date: 2017/03/30 10:30:00
 
-catergories:
+categories:
 
 - Study
 
