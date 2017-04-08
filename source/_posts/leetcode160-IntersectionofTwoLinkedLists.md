@@ -1,4 +1,4 @@
-title: leetcode160 IntersectionofTwoLinkedLists
+title: leetcode160 Intersection of Two Linked Lists
 
 date: 2017/04/05 17:00:00
 

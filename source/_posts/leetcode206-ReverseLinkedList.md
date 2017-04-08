@@ -1,4 +1,4 @@
-title: leetcode206 ReverseLinkedList
+title: leetcode206 Reverse Linked List
 
 date: 2017/04/06 22:00:00
 

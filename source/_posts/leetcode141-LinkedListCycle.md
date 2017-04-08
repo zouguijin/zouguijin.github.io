@@ -1,4 +1,4 @@
-title: leetcode141 LinkedListCycle
+title: leetcode141 Linked List Cycle
 
 categories:
 

@@ -1,4 +1,4 @@
-title: leetcode203 RemoveLinkedListElements
+title: leetcode203 Remove Linked List Elements
 
 date: 2017/04/07 10:00:00
 
