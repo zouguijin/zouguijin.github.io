@@ -16,7 +16,7 @@ tags:
 
 ## leetcode#19 Remove Nth Node From End of List
 
->Given a linked list, remove the *n*th node from the end of list and return its head.
+>Given a linked list, remove the nth node from the end of list and return its head.
 >
 >For example,
 >
@@ -25,9 +25,9 @@ tags:
 >After removing the second node from the end, the linked list becomes 1->2->3->5.
 >```
 >
->**Note:**
+>Note:
 >
->Given *n* will always be valid.
+>Given n will always be valid.
 >
 >Try to do this in one pass.
 
