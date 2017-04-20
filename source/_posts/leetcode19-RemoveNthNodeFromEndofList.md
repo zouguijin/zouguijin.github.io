@@ -26,7 +26,9 @@ tags:
 >```
 >
 >**Note:**
+>
 >Given *n* will always be valid.
+>
 >Try to do this in one pass.
 
 ##### 解释：
