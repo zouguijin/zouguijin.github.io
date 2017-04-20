@@ -9,8 +9,8 @@ categories:
 tags:
 
 - leetcode
-- recursive algorithm
 - linkedlist
+- Recursion
 
 ---
 

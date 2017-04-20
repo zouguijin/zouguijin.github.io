@@ -10,7 +10,7 @@ tags:
 
 - leetcode
 - linkedlist
-- stack
+- Stack
 
 ---
 

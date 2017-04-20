@@ -11,7 +11,7 @@ tags:
 - leetcode
 - linkedlist
 - array
-- recursive algorithm
+- Recursion
 
 ---
 
