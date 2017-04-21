@@ -38,55 +38,54 @@
 <li><p>客户端 -&gt; 服务器的命令</p>
 <p>其中Telnet命令只包含中断进程&lt; IAC,IP &gt;和Telnet的同步信号，即紧急方式下&lt; IAC,DM &gt;；</p>
 <p>常用的FTP命令：</p>
-<p>| 命令            | 解释            |<br>| ————- | ————- |<br>| USER username | 输入并传送服务器上的用户名 |<br>| LIST filelist | 输入并传送服务器的登录口令 |<br>|               |               |<br>|               |               |<br>|               |               |<br>|               |               |<br>|               |               |<br>|               |               |<br>|               |               |<br>|               |               |</p>
 </li>
 </ul>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">命令</th>
+<th style="text-align:center">命令</th>
 <th style="text-align:left">解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">USER username</td>
+<td style="text-align:center">USER username</td>
 <td style="text-align:left">输入并传送服务器上的用户名</td>
 </tr>
 <tr>
-<td style="text-align:left">PASS password</td>
+<td style="text-align:center">PASS password</td>
 <td style="text-align:left">输入并传送服务器的登录口令</td>
 </tr>
 <tr>
-<td style="text-align:left">LIST filelist</td>
+<td style="text-align:center">LIST filelist</td>
 <td style="text-align:left">列表显示文件或者目录</td>
 </tr>
 <tr>
-<td style="text-align:left">RETR filename</td>
+<td style="text-align:center">RETR filename</td>
 <td style="text-align:left">检索一个文件（读文件）</td>
 </tr>
 <tr>
-<td style="text-align:left">STOR filename</td>
+<td style="text-align:center">STOR filename</td>
 <td style="text-align:left">存放一个文件（写文件）</td>
 </tr>
 <tr>
-<td style="text-align:left">TYPE type</td>
+<td style="text-align:center">TYPE type</td>
 <td style="text-align:left">说明文件的类型：type=A表示ASCII码，type=I表示图像</td>
 </tr>
 <tr>
-<td style="text-align:left">PORT n1,n2,n3,n4,n5,n6</td>
+<td style="text-align:center">PORT n1,n2,n3,n4,n5,n6</td>
 <td style="text-align:left">客户端的IP地址（n1.n2.n3.n4）和端口号（n5*256+n6）</td>
 </tr>
 <tr>
-<td style="text-align:left">SYST</td>
+<td style="text-align:center">SYST</td>
 <td style="text-align:left">要求服务器返回系统类型</td>
 </tr>
 <tr>
-<td style="text-align:left">QUIT</td>
+<td style="text-align:center">QUIT</td>
 <td style="text-align:left">从服务器退出并注销登录</td>
 </tr>
 <tr>
-<td style="text-align:left">ABOR</td>
+<td style="text-align:center">ABOR</td>
 <td style="text-align:left">放弃先前的FTP命令和数据传输</td>
 </tr>
 </tbody>
@@ -200,20 +199,6 @@
 <p>匿名FTP，必须使用“<strong>anonymous</strong>”作为用户名注册。</p>
 <h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6  总结"></a>6  总结</h3><p>FTP是基于TCP通信模式的文件传输协议，FTP比较简单易懂，设计和实现的思路也很清晰，通过对FTP的认识和理解，有助于后续理解基于TCP所开发的额外功能和应用，也对以后开发基于TCP的通信功能或者类FTP的功能有所帮助。</p>
 <p>FTP使用两个TCP连接的特点，在保持客户端与服务器会话的长期性的同时，尽可能地减少了由于客户端断断续续与服务器之间传输文件，重复与服务器建立连接、取消连接，所带来的控制信息的开销（毕竟TCP“三次握手”的过程还是很复杂的，通信开销还是蛮多的）。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">df</th>
-<th>df</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">fd</td>
-<td>fd</td>
-</tr>
-</tbody>
-</table>
 </div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
     $(".fancybox").fancybox();
 });
