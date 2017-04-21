@@ -39,7 +39,7 @@
 <p>其中Telnet命令只包含中断进程&lt; IAC,IP &gt;和Telnet的同步信号，即紧急方式下&lt; IAC,DM &gt;；</p>
 <p>常用的FTP命令：</p>
 <p>​</p>
-<p>|           命令           |                  解释                  |<br>| :——————–: | :———————————-: |<br>|     USER username      |            输入并传送服务器上的用户名             |<br>|     PASS password      |            输入并传送服务器的登录口令             |<br>|     LIST filelist      |              列表显示文件或者目录              |<br>|     RETR filename      |             检索一个文件（读文件）              |<br>|     STOR filename      |             存放一个文件（写文件）              |<br>|       TYPE type        |  说明文件的类型：type=A表示ASCII码，type=I表示图像   |<br>| PORT n1,n2,n3,n4,n5,n6 | 客户端的IP地址（n1.n2.n3.n4）和端口号（n5*256+n6） |<br>|          SYST          |             要求服务器返回系统类型              |<br>|          QUIT          |             从服务器退出并注销登录              |<br>|          ABOR          |           放弃先前的FTP命令和数据传输            |</p>
+<p>| 命令                     | 解释                                   |<br>| :——————— | :———————————– |<br>| USER username          | 输入并传送服务器上的用户名                        |<br>| PASS password          | 输入并传送服务器的登录口令                        |<br>| LIST filelist          | 列表显示文件或者目录                           |<br>| RETR filename          | 检索一个文件（读文件）                          |<br>| STOR filename          | 存放一个文件（写文件）                          |<br>| TYPE type              | 说明文件的类型：type=A表示ASCII码，type=I表示图像    |<br>| PORT n1,n2,n3,n4,n5,n6 | 客户端的IP地址（n1.n2.n3.n4）和端口号（n5*256+n6） |<br>| SYST                   | 要求服务器返回系统类型                          |<br>| QUIT                   | 从服务器退出并注销登录                          |<br>| ABOR                   | 放弃先前的FTP命令和数据传输                      |</p>
 </li>
 </ul>
 <ul>
@@ -48,7 +48,7 @@
 <p>3位数字的每一位都有不同的含义，组合起来就是应答的最终含义。</p>
 <p>FTP典型应答，每一个典型应答都带有一个可能的报文选项：</p>
 <p>​</p>
-<p>| 应答数字 |      携带的报文选项      |<br>| :–: | :—————: |<br>| 125  |   数据连接已经打开，传输开始   |<br>| 200  |       服务器就绪       |<br>| 214  |    帮助报文（面向用户）     |<br>| 331  | 用户名正确，要求输入对应的登录口令 |<br>| 425  |     无法打开数据连接      |<br>| 452  |      用户错写文件       |<br>| 500  |   语法错误（未被认可的命令）   |<br>| 501  |    语法错误（参数无效）     |<br>| 502  | 未实现的MODE（方式命令）类型  |</p>
+<p>| 应答数字 | 携带的报文选项           |<br>| :— | :—————- |<br>| 125  | 数据连接已经打开，传输开始     |<br>| 200  | 服务器就绪             |<br>| 214  | 帮助报文（面向用户）        |<br>| 331  | 用户名正确，要求输入对应的登录口令 |<br>| 425  | 无法打开数据连接          |<br>| 452  | 用户错写文件            |<br>| 500  | 语法错误（未被认可的命令）     |<br>| 501  | 语法错误（参数无效）        |<br>| 502  | 未实现的MODE（方式命令）类型  |</p>
 </li>
 </ul>
 <h3 id="3-FTP连接的建立与管理"><a href="#3-FTP连接的建立与管理" class="headerlink" title="3  FTP连接的建立与管理"></a>3  FTP连接的建立与管理</h3><p>FTP连接包括控制连接和数据连接，其中控制连接在C/S连接的全过程都会<strong>保持</strong>，而数据连接则可以根据需要<strong>随时来随时走</strong>，甚至在没有数据连接、没有数据传输时候，控制连接还可以一直保持着。</p>
@@ -110,13 +110,13 @@
 <table>
 <thead>
 <tr>
-<th>df</th>
+<th style="text-align:center">df</th>
 <th>df</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>fd</td>
+<td style="text-align:center">fd</td>
 <td>fd</td>
 </tr>
 </tbody>
