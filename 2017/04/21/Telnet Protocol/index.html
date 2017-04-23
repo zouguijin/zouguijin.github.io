@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Telnet Protocol | StarSea</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/font.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- gallery that comes before the header--><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-link" href="/tags/TCP-IP/">TCP/IP</a><a class="post-tag-link" href="/tags/Telnet-Protocol/">Telnet Protocol</a></div><div class="post-time">2017-04-21</div></div></div><div class="container post-header"><h1>Telnet Protocol</h1></div><div class="container post-content"><h3 id="0-Telnet与远程登录"><a href="#0-Telnet与远程登录" class="headerlink" title="0  Telnet与远程登录"></a>0  Telnet与远程登录</h3><p>远程登录，即通过先登录一台主机，然后再通过网络远程登录到任何一台连接到网络的主机上（需要有登录账号和口令），而不需要为每一台主机连接一个硬件终端。</p>
+<p>TCP/IP网络上，远程登录采用C/S模式，有两种远程登录的方法：</p>
+<p>（1）Telnet，最古老的Internet应用，全称Telecommunication Network Protocol（电信网络协议）。Telnet受到TCP/IP的广泛支持，可以运行在不同操作系统的主机之间，Telnet客户端和服务器端之间通过<strong>选项协商机制</strong>，确定通信双方所能提供的通信功能。</p>
+<p>（2）Rlogin，起源于伯克利Unix，现在也可以在其他操作系统上运行，比Telnet简单。</p>
+<h3 id="1-Telnet与C-S模式"><a href="#1-Telnet与C-S模式" class="headerlink" title="1  Telnet与C/S模式"></a>1  Telnet与C/S模式</h3><ul>
+<li>Telnet客户进程同时与<strong>终端用户</strong>和<strong>TCP/IP协议模块</strong>进行交互，所以在客户进程上键入的任何信息，将会通过TCP连接传输到服务器端，同时键入的信息和返回的信息都会回显在终端上。</li>
+<li>Telnet只使用一条TCP连接，意味着控制信息和数据信息将会在一条TCP连接上传输，因此必须要有相应的方式区分控制命令和数据。</li>
+<li>Telnet客户进程和服务器进程属于用户应用程序。</li>
+</ul>
+<h3 id="2-NVT-ASCII-与-Telnet-命令"><a href="#2-NVT-ASCII-与-Telnet-命令" class="headerlink" title="2  NVT ASCII 与 Telnet 命令"></a>2  NVT ASCII 与 Telnet 命令</h3><p>Telnet协议定义了一种通用字符终端——网络虚拟终端NVT（Network Virtual Terminal）。</p>
+<p>相应的，有NVT ASCII——7比特的ASCII字符集，网络之间的协议族都使用NVT ASCII。每7比特都将最高位置为0，然后以8比特的格式进行传送。</p>
+<p>每一行结束都有两个字符——CR（回车） LF（换行），也可以用<code>\r\n</code>表示。</p>
+<p>NVT ASCII应用广泛，FTP、SMTP等协议都使用其来描述客户端发出的<strong>命令</strong>以及服务器对命令的<strong>应答</strong> 。</p>
+<p>…（未完）</p>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
