@@ -1,0 +1,205 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>FTP 文件传送协议 | StarSea</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/font.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- gallery that comes before the header--><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-link" href="/tags/FTP/">FTP</a><a class="post-tag-link" href="/tags/TCP-IP/">TCP/IP</a></div><div class="post-time">2017-04-20</div></div></div><div class="container post-header"><h1>FTP 文件传送协议</h1></div><div class="container post-content"><h3 id="0-主要特点"><a href="#0-主要特点" class="headerlink" title="0  主要特点"></a>0  主要特点</h3><p>FTP（File Transfer Protocol），文件传输协议，所提供的的文件传送功能可以将一个完整的文件从一个系统复制到另一个系统中。若要使用FTP，或需要有登录文件服务器的账号，或通过允许使用匿名FTP的文件服务器。</p>
+<ul>
+<li><p>FTP采用<strong>两个TCP连接</strong>来传输一个文件：</p>
+<ul>
+<li><p>控制连接：用于传送客户发送的命令和服务器的响应，该连接以C/S的方式建立，<strong>始终在等待</strong>客户与服务器之间的通信（服务器<strong>被动地</strong>打开用于FTP的端口<code>PORT 21</code>，客户端则<strong>主动地</strong>打开<code>PORT 21</code>，即FTP控制连接的建立以及后续的控制命令的传送，都是由客户端向服务器的<code>PORT 21</code>发送命令，然后服务器响应完成的）</p>
+<p>IP对控制连接的<strong>服务类型</strong>为<strong>“最大限度地减少迟延”</strong>，因为客户端命令通常是由用户键入的。</p>
+</li>
+<li><p>数据连接：用于在客户端和服务器之间文件的传输。</p>
+<p>IP对数据连接的<strong>服务类型</strong>为<strong>“最大限度地提高吞吐量”</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-控制文件传送和存储的选择"><a href="#1-控制文件传送和存储的选择" class="headerlink" title="1  控制文件传送和存储的选择"></a>1  控制文件传送和存储的选择</h3><p>FTP文件传输（在数据连接中传）的选择有四个方面，每一个方面必须做一个选择：</p>
+<ul>
+<li><p>文件类型</p>
+<p>常用的有（1）ASCII码文件类型（默认选择）（2）图像文件类型（也称二进制文件类型）。</p>
+<p>ASCII码文件类型，文本文件将以<strong>NVT ASCII码</strong>的形式在数据连接中传输（即要求每一个系统都必须拥有NVT ASCII码与本地文本文件互相转换的能力）。NVT ASCII码传输的每一行都带有一个回车CR，接着是一个换行LF，这意味着文件的收方必须扫描每一个字节，找到<strong>CR LF对</strong>。</p>
+<p>图像文件类型（即二进制文件类型），连续的比特流，通常用于传输二进制文件。</p>
+</li>
+<li><p>格式控制</p>
+<p>只对上述的ASCII码文件类型有效。</p>
+<p>常用的有非打印（默认），即文件中不含有垂直格式信息。</p>
+</li>
+<li><p>结构</p>
+<p>常用的有文件结构（默认），该选项下，文件被认为是一个<strong>连续的字节流</strong>，不存在内部的文件结构。</p>
+</li>
+<li><p>传输方式</p>
+<p>规定文件在数据连接中如何传输。</p>
+<p>常用的有流方式（默认），即文件将以<strong>字节流</strong>的方式在数据连接中传输。对应于上述文件结构，发送方将在文件末尾提示关闭数据连接。</p>
+<p>此外还有块方式，压缩方式。</p>
+<p>PS.上述常用的选择，也即是Unix系统中对FTP的传输限制。</p>
+</li>
+</ul>
+<h3 id="2-FTP命令与应答"><a href="#2-FTP命令与应答" class="headerlink" title="2  FTP命令与应答"></a>2  FTP命令与应答</h3><p>命令和对命令的响应，在C/S之间的<strong>控制连接</strong>上，以<strong>NVT ASCII码</strong>的形式传送，即要求每行的结尾都要返回<strong>CR LF对</strong>。</p>
+<p>PS. <strong>Telnet协议</strong>也用到NVT ASCII码，在FTP的的控制连接通信中，部分场景使用了Telnet命令，这些命令都是以<strong>IAC</strong>开头。<em>（关于Telnet命令，将在另一篇文章中介绍）</em></p>
+<ul>
+<li><p>客户端 -&gt; 服务器的命令</p>
+<p>其中Telnet命令只包含中断进程&lt; IAC,IP &gt;和Telnet的同步信号，即紧急方式下&lt; IAC,DM &gt;；</p>
+<p>常用的FTP命令：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">USER username</td>
+<td style="text-align:center">输入并传送服务器上的用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">PASS password</td>
+<td style="text-align:center">输入并传送服务器的登录口令</td>
+</tr>
+<tr>
+<td style="text-align:center">LIST filelist</td>
+<td style="text-align:center">列表显示文件或者目录</td>
+</tr>
+<tr>
+<td style="text-align:center">RETR filename</td>
+<td style="text-align:center">检索一个文件（读文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">STOR filename</td>
+<td style="text-align:center">存放一个文件（写文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">TYPE type</td>
+<td style="text-align:center">说明文件的类型：type=A表示ASCII码，type=I表示图像</td>
+</tr>
+<tr>
+<td style="text-align:center">PORT n1,n2,n3,n4,n5,n6</td>
+<td style="text-align:center">客户端的IP地址（n1.n2.n3.n4）和端口号（n5*256+n6）</td>
+</tr>
+<tr>
+<td style="text-align:center">SYST</td>
+<td style="text-align:center">要求服务器返回系统类型</td>
+</tr>
+<tr>
+<td style="text-align:center">QUIT</td>
+<td style="text-align:center">从服务器退出并注销登录</td>
+</tr>
+<tr>
+<td style="text-align:center">ABOR</td>
+<td style="text-align:center">放弃先前的FTP命令和数据传输</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>服务器 -&gt; 客户端的应答</p>
+<p>应答都是ASCII码形式的<strong>3位数字</strong>，并在数字之后跟有报文选项。</p>
+<p>3位数字的每一位都有不同的含义，组合起来就是应答的最终含义。</p>
+<p>FTP典型应答，每一个典型应答都带有一个可能的报文选项：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">应答数字</th>
+<th style="text-align:center">携带的报文选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">125</td>
+<td style="text-align:center">数据连接已经打开，传输开始</td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center">服务器就绪</td>
+</tr>
+<tr>
+<td style="text-align:center">214</td>
+<td style="text-align:center">帮助报文（面向用户）</td>
+</tr>
+<tr>
+<td style="text-align:center">331</td>
+<td style="text-align:center">用户名正确，要求输入对应的登录口令</td>
+</tr>
+<tr>
+<td style="text-align:center">425</td>
+<td style="text-align:center">无法打开数据连接</td>
+</tr>
+<tr>
+<td style="text-align:center">452</td>
+<td style="text-align:center">用户错写文件</td>
+</tr>
+<tr>
+<td style="text-align:center">500</td>
+<td style="text-align:center">语法错误（未被认可的命令）</td>
+</tr>
+<tr>
+<td style="text-align:center">501</td>
+<td style="text-align:center">语法错误（参数无效）</td>
+</tr>
+<tr>
+<td style="text-align:center">502</td>
+<td style="text-align:center">未实现的MODE（方式命令）类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-FTP连接的建立与管理"><a href="#3-FTP连接的建立与管理" class="headerlink" title="3  FTP连接的建立与管理"></a>3  FTP连接的建立与管理</h3><p>FTP连接包括控制连接和数据连接，其中控制连接在C/S连接的全过程都会<strong>保持</strong>，而数据连接则可以根据需要<strong>随时来随时走</strong>，甚至在没有数据连接、没有数据传输时候，控制连接还可以一直保持着。</p>
+<ul>
+<li><p>控制连接的建立</p>
+<p>当客户端希望与服务器建立起上传或下载文件的数据传输业务时，客户端会向服务器的TCP <code>PORT21</code>发起建立连接的请求，服务器若接受客户端的请求，并完成连接的建立，则C/S控制连接就建立完成。</p>
+<p>PS. 为什么要叫做“TCP端口”？因为FTP的通信是建立在TCP协议的基础之上的，FTP的默认端口就是TCP的21端口。</p>
+</li>
+<li><p>数据连接的建立</p>
+<p>数据连接即是用于数据传输的连接，有三大用途：（1）从客户端向服务器发送一个文件；（2）从服务器向客户端发送一个文件；（3）从服务器向客户端发送文件列表或者目录列表。</p>
+<p>由于文件传输方式一般是流的方式，<strong>文件的结尾是以关闭数据连接为标志</strong>（即一个文件传输完了，就会关闭该数据连接），所以对每一个文件或者目录列表的传输都需要建立一个全新的数据连接（<strong>一对一</strong>）。</p>
+<p>数据连接的建立有两种：（1）主动模式<code>PORT</code>；（2）被动模式<code>pasv</code> ：</p>
+<p>（这里的“主动”是以先打开数据连接的端口并通知对方的一方为准）</p>
+<ul>
+<li><p>主动模式<code>PORT</code></p>
+<p>在控制连接建立的基础上<code>PORT21</code>，当需要传送数据时，客户端在控制连接上通过<code>PORT</code>命令告诉服务器：“客户端打开了XXXX端口，请服务器来连接我”，然后服务器通过<code>PORT20</code>向端口XXXX发送连接请求，并由此建立数据连接，之后便在该数据连接上传输数据。</p>
+<p>PS. 主动模式<code>PORT</code>中，数据连接的服务器一侧将会<strong>一直使用<code>PORT20</code></strong>，不论后续将会有多少个客户端的连接。</p>
+<p>PSS. 如果FTP服务器没有使用默认端口<code>PORT21</code>，而使用了其他的某一个端口A建立控制连接，那么在数据连接将会使用端口A-1，因此在设置的时候，需要将服务器端的这两个端口都保留。</p>
+</li>
+<li><p>被动模式<code>PASV</code></p>
+<p>在控制连接建立的基础上<code>PORT21</code>，当需要传送数据时，服务器通过控制链路使用<code>PASV</code>命令告诉客户端：“服务器打开了端口XXXX，请客户端来连接我”，然后客户端将在可用的端口号中选取一个，用于与服务器的端口XXXX建立数据连接。</p>
+<p>PS. 被动模式<code>PASV</code>中，每需要开启一个数据传输的过程，服务器都需要<strong>使用一个新的可用的端口</strong>，如此一来，当数据传输的请求过多时，服务器将会开启并使用过多的端口，服务器的安全性将会受到威胁。也因此，正常情况下，都会使用主动模式。</p>
+<p>那为什么还存在被动模式呢？这是因为<strong>NAT</strong>的出现，内网的多台主机将会对外网呈现同一个IP地址，如果仍使用主动模式，则内网的客户端主动向服务器通告的socket信息（A:XXXX），将会在出网关、进外网的时候由NAT修改新的socket信息（B:XXXX），如此一来服务器将会认为需要与B:XXXX建立数据连接并传送数据，可惜公网IP地址B并没有开启XXXX端口。所以，这种情况下，需要使用被动模式<code>PASV</code>，由服务器来告知内网的客户端，服务器一侧开启的端口信息。</p>
+</li>
+</ul>
+</li>
+<li><p>连接的管理</p>
+<ul>
+<li><p>临时数据端口：主动模式<code>PORT</code>下建立数据连接，客户端将会要求TCP为其数据连接提供一个<strong>临时端口号</strong>，并通过<code>PORT</code>命令将包含该端口号的socket信息由控制连接发送给服务器。</p>
+</li>
+<li><p>默认数据端口：在上述已经建立了一条数据连接的基础上，客户端希望再次与服务器建立数据连接，如果使用<code>PORT</code>命令则又会申请到一个临时端口号，但若没有使用<code>PORT</code>命令，则意味着本次请求建立数据连接，没有指明数据连接客户一侧的端口号，此时服务器将会使用<strong>控制连接客户端一侧的端口号</strong>作为数据连接客户端一侧的端口号。</p>
+<p>设，控制连接的客户端和服务器socket分别是：&lt; A:P1 &gt;，&lt; B:P2 &gt;，原有的数据连接的客户端和服务器socket分别是：&lt; A:P3 &gt;，&lt; B:P2-1 &gt;。</p>
+<p>如果使用<code>PORT</code>命令，就会使用TCP提供的新的临时端口，数据连接两侧socket为：&lt; A:P4 &gt;，&lt; B:P2-1 &gt;</p>
+<p>如果不使用<code>PORT</code>命令，就会使用默认数据端口，即新的数据连接两侧的socket为：&lt; A:P1 &gt;，&lt; B:P2-1 &gt;</p>
+<p>由于socket四元组只要有一个不相同，就可以使用，因此使用默认数据端口，是可以的。</p>
+<p>但是默认数据端口的使用会存在<strong>问题</strong>：</p>
+<p>在上一个使用默认数据端口的数据连接关闭之后，按照TCP对<strong>连接关闭的“四次握手”规则</strong>，该数据连接的socket对将会被置为<strong>2MSL等待</strong>，若此时紧接着又希望使用默认数据端口建立数据连接，那么连接建立将会失败，因为上一个连接已经使用了&lt; A:P1 &gt;，&lt; B:P2-1 &gt;这一对socket，而且还处于2MSL的等待状态，无法建立新连接。（还有一个原因，<strong>TCP规定禁止服务器发送同步信息SYN</strong>，这就没办法让服务器跳过socket对的2MSL等待状态来重用相同的socket对）</p>
+</li>
+</ul>
+</li>
+<li><p>连接的停止</p>
+<p>在文件传输结束的时候，文件流末尾将会携带相应的信息，提示关闭数据连接，由此就可以通过“四次握手”停止数据连接。</p>
+<p>至于控制连接，可以通过<code>QUIT</code>命令注销用户登录，进行停止。</p>
+</li>
+</ul>
+<h3 id="4-FTP文件传输的异常中止"><a href="#4-FTP文件传输的异常中止" class="headerlink" title="4  FTP文件传输的异常中止"></a>4  FTP文件传输的异常中止</h3><ul>
+<li><p>异常中止客户端向服务器的文件传输</p>
+<p>只需要客户端停止在数据连接上传输数据，并通过控制连接向服务器发送<code>ABOR</code>命令即可。</p>
+</li>
+<li><p>异常中止客户端接受服务器传输来的文件</p>
+<p>比较复杂，需要客户端告知服务器立即停止数据的发送，需要用到<strong>Telnet同步信号</strong>。</p>
+<p>尽管已经知道并作出了异常中止文件传输的操作，但是客户进程还需要在数据连接上接受部分数据报文（即<strong>并不是立即停止接受数据</strong>）</p>
+</li>
+</ul>
+<h3 id="5-匿名FTP"><a href="#5-匿名FTP" class="headerlink" title="5  匿名FTP"></a>5  匿名FTP</h3><p>允许匿名FTP的服务器，将会允许任何人注册并使用FTP与该服务器进行文件的传输。</p>
+<p>匿名FTP，必须使用“<strong>anonymous</strong>”作为用户名注册。</p>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6  总结"></a>6  总结</h3><p>FTP是基于TCP通信模式的文件传输协议，FTP比较简单易懂，设计和实现的思路也很清晰，通过对FTP的认识和理解，有助于后续理解基于TCP所开发的额外功能和应用，也对以后开发基于TCP的通信功能或者类FTP的功能有所帮助。</p>
+<p>FTP使用两个TCP连接的特点，在保持客户端与服务器会话的长期性的同时，尽可能地减少了由于客户端断断续续与服务器之间传输文件，重复与服务器建立连接、取消连接，所带来的控制信息的开销（毕竟TCP“三次握手”的过程还是很复杂的，通信开销还是蛮多的）。</p>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
