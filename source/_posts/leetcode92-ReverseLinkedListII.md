@@ -10,6 +10,7 @@ tags:
 
 - leetcode
 - linkedlist
+- reverse
 
 ---
 
