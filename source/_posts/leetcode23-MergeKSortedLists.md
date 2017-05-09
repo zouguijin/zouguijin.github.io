@@ -77,6 +77,53 @@ public class Solution {
 }
 ```
 
+借鉴了**递归+二叉树**的思路：
+
+```
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        return binaryTreeMerge(lists,0,lists.length - 1);
+    }
+    
+    public static ListNode binaryTreeMerge(ListNode[] subLists, int begin, int end) {
+        if(begin == end) return subLists[begin];
+        if(begin < end) {
+            int mid = begin + (end - begin) / 2;
+            ListNode list1 = binaryTreeMerge(subLists,begin,mid);
+            ListNode list2 = binaryTreeMerge(subLists,mid + 1,end);
+            return mergeTwoLists(list1,list2);
+        }
+        else {
+            return null;
+        }
+        
+    }
+    
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null) { return list2; }
+        if(list2 == null) { return list1; }
+        ListNode mergeList;
+        if(list1.val < list2.val) {
+            mergeList = list1;
+            mergeList.next = mergeTwoLists(list1.next,list2);
+        }
+        else {
+            mergeList = list2;
+            mergeList.next = mergeTwoLists(list1,list2.next);
+        }
+        return mergeList;
+    }
+}
+```
+
 ##### 大神解法
 
 解法一：**递归+二叉树**的思路
