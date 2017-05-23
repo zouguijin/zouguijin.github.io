@@ -121,5 +121,5 @@ StringBuilder是线程不安全的，即一般在单线程使用字符缓冲区�
 
 #### 4 Java Doc
 
-http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html
+http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html 
 
