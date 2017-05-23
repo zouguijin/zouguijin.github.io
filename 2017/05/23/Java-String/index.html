@@ -108,7 +108,7 @@
 <h4 id="2-StringBuilder与StringBuffer"><a href="#2-StringBuilder与StringBuffer" class="headerlink" title="2 StringBuilder与StringBuffer"></a>2 StringBuilder与StringBuffer</h4><p>StringBuilder是线程不安全的，即一般在单线程使用字符缓冲区的时候使用，多线程的时候保证线程安全一般使用StringBuffer。但是，StringBuffer由于考虑到了线程安全，所以较StringBuilder要慢一点。</p>
 <h4 id="3-toString-方法"><a href="#3-toString-方法" class="headerlink" title="3 toString()方法"></a>3 toString()方法</h4><p>所有的容器类都覆写了toString()方法。</p>
 <p>若想打印<strong>对象的内存地址</strong>，准确的应该是调用<strong>Object.toString()</strong>，即<strong>super.toString()</strong>，而不是当前类的this.toString()。（Object类是所有类的父类，包括容器类）</p>
-<h4 id="4-Java-Doc"><a href="#4-Java-Doc" class="headerlink" title="4 Java Doc"></a>4 Java Doc</h4><p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html" target="_blank" rel="external">http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html</a></p>
+<h4 id="4-Java-Doc"><a href="#4-Java-Doc" class="headerlink" title="4 Java Doc"></a>4 Java Doc</h4><p><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html" target="_blank" rel="external">http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html</a> </p>
 </div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
     $(".fancybox").fancybox();
 });
