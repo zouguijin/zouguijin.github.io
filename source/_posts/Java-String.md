@@ -1,6 +1,6 @@
 title: Java---String
 
-date: 2017/05/23 12:00:00
+date: 2017/05/21 12:00:00
 
 categories:
 
@@ -8,7 +8,7 @@ categories:
 
 tags:
 
-- Java Basis
+- JavaBasis
 
 ---
 
@@ -95,7 +95,7 @@ String对象具有只读特性，可以给一个String对象添加任意多的�
 
 #### （1）String.split()
 
-该方法将字符串从**正则表达式匹配**的地方，**切分**成前后字符串，切分后的结果一般会用数组Array来存储：`Arrays.toString(str.split(" "));`
+该方法将字符串从**正则表达式匹配**的地方，**切分**成前后字符串，以数组的方式返回结果。切分后的一般会使用`Arrays.toString()`方法转换为字符串：`Arrays.toString(str.split(" "));`
 
 #### （2）String.replaceFirst()/String.replaceAll()
 
@@ -121,5 +121,5 @@ StringBuilder是线程不安全的，即一般在单线程使用字符缓冲区�
 
 #### 4 Java Doc
 
-http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html 
+http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html
 
