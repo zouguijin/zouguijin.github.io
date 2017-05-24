@@ -94,13 +94,14 @@
 <tr>
 <td style="text-align:center"><strong>e</strong></td>
 <td style="text-align:center"><strong>浮点数（科学计数）</strong></td>
-<td style="text-align:center"></td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
 </tbody>
 </table>
 <p><code>String.format()</code>是一个静态方法，使用方法和<code>Formatter.format()</code>一样，只不过输出的是String对象。</p>
 <h3 id="4-正则表达式与String类"><a href="#4-正则表达式与String类" class="headerlink" title="4 正则表达式与String类"></a>4 正则表达式与String类</h3><p>正则表达式可以用于解决各种<strong>字符串处理</strong>相关的问题，包括匹配、选择、编辑以及验证等等。</p>
-<p>关于正则表达式，将会有另一篇文章介绍。<a href="">正则表达式</a></p>
+<p>关于正则表达式，将会有另一篇文章介绍。<a href="https://zouguijin.github.io/2017/05/24/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></p>
 <h4 id="（1）String-split"><a href="#（1）String-split" class="headerlink" title="（1）String.split()"></a>（1）String.split()</h4><p>该方法将字符串从<strong>正则表达式匹配</strong>的地方，<strong>切分</strong>成前后字符串，以数组的方式返回结果。切分后的一般会使用<code>Arrays.toString()</code>方法转换为字符串：<code>Arrays.toString(str.split(&quot; &quot;));</code></p>
 <h4 id="（2）String-replaceFirst-String-replaceAll"><a href="#（2）String-replaceFirst-String-replaceAll" class="headerlink" title="（2）String.replaceFirst()/String.replaceAll()"></a>（2）String.replaceFirst()/String.replaceAll()</h4><p><code>String.replaceFirst(&quot;regex&quot;,&quot;replaceWords&quot;)</code>，只替换正则表达式匹配到的<strong>第一个</strong>子串。</p>
 <p><code>String.replaceAll(&quot;regex&quot;,&quot;replaceWords&quot;)</code>，会将正则表达式匹配到的<strong>所有</strong>子串都替换。</p>
