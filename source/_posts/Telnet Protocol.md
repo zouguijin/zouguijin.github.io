@@ -8,8 +8,8 @@ categories:
 
 tags:
 
-- TCP/IP
-- Telnet Protocol
+- TCPIP
+- TelnetProtocol
 
 ---
 
