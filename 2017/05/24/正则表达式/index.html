@@ -41,11 +41,9 @@
 <tbody>
 <tr>
 <td style="text-align:center"><strong>[abc]</strong></td>
-<td style="text-align:center">**包含a b c的任意字符（等同于a\</td>
-<td style="text-align:center">b\</td>
-<td style="text-align:center">c）**</td>
-<td><strong>\S</strong></td>
-<td><strong>非空白符，即除了上述五种空白符之外的字符</strong></td>
+<td style="text-align:center"><strong>包含a b c的任意字符（等同于abc之间的或）</strong></td>
+<td style="text-align:center"><strong>\S</strong></td>
+<td style="text-align:center"><strong>非空白符，即除了上述五种空白符之外的字符</strong></td>
 </tr>
 <tr>
 <td style="text-align:center"><strong>[^abc]</strong></td>
@@ -61,13 +59,9 @@
 </tr>
 <tr>
 <td style="text-align:center"><strong>[abc[de]]</strong></td>
-<td style="text-align:center">**类似于a\</td>
-<td style="text-align:center">b\</td>
-<td style="text-align:center">c\</td>
-<td>d\</td>
-<td>e**</td>
-<td><strong>\w</strong></td>
-<td><strong>词字符，即字母和数字，[a-zA-Z0-9]</strong></td>
+<td style="text-align:center"><strong>类似于abcde之间的或</strong></td>
+<td style="text-align:center"><strong>\w</strong></td>
+<td style="text-align:center"><strong>词字符，即字母和数字，[a-zA-Z0-9]</strong></td>
 </tr>
 <tr>
 <td style="text-align:center"><strong>[a-z&amp;&amp;[de]]</strong></td>
@@ -97,7 +91,8 @@
 <tr>
 <td style="text-align:center"><strong>\G</strong></td>
 <td style="text-align:center"><strong>前一个匹配的结束</strong></td>
-<td style="text-align:center"></td>
+<td style="text-align:center"><strong>-</strong></td>
+<td style="text-align:center"><strong>-</strong></td>
 </tr>
 </tbody>
 </table>
