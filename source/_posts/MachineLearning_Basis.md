@@ -42,17 +42,11 @@ new input -> h -> estimated output(预测结果)
 
 一个简单的线性回归预测问题，其中$\theta_0$和$\theta_1$是线性拟合直线的两个参数，$i$表示第i个数据，$x^{(i)}$表示第i个数据的输入值，$y^{(i)}$表示第i个数据的输出值，$h_{\theta}(x^{(i)})$表示第I个数据的预测值，为了让拟合的效果最好，即让${(h_\theta(x^{(i)})-y^{(i)})}^2$的结果最小：
 
-{% math %}
-$$
-{minimize({\theta_0}{\theta_1})} {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2
-$$
-
-{% endmath %}
+{% math %}{minimize({\theta_0}{\theta_1})} {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2{% endmath %}
 
 令
-$$
+
 {% math %}J(\theta_0,\theta_1) = {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2{% endmath %}
-$$
 
 
 则$J(\theta_0,\theta_1) $称为**代价函数（Cost Function）**，也成为平方误差代价函数（Square Error Cost Function）。
