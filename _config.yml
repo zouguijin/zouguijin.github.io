@@ -73,5 +73,9 @@ deploy:
   repo: https://github.com/zouguijin/zouguijin.github.io.git
   branch: master
 
+# Plugins
+plugins:
+- hexo-math
+
 # Favicon
 # favicon: /favicon16.ico
