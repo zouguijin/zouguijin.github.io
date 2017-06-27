@@ -46,7 +46,7 @@ new input -> h -> estimated output(预测结果)
 
 令
 
-$J(\theta\_0,\theta\_1) = {\ 1\over 2m} {\sum\_{i=1}\^m}{(h\_\theta(x\^{(i)})-y\^{(i)})}^2$
+$J(\theta\_0,\theta\_1) = {\ 1\over 2m} {\sum\_{i=1}^m}{(h\_\theta(x^{(i)})-y^{(i)})}^2$
 
 
 则$J(\theta_0,\theta_1) ​$称为**代价函数（Cost Function）**，也成为平方误差代价函数（Square Error Cost Function）。
