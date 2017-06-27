@@ -46,10 +46,10 @@ new input -> h -> estimated output(预测结果)
 
 令
 
-{% math %}J(\theta_0,\theta_1) = {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2{% endmath %}
+$J(\theta\_0,\theta\_1) = {\ 1\over 2m} {\sum\_{i=1}\^m}{(h\_\theta(x\^{(i)})-y\^{(i)})}^2$
 
 
-则$J(\theta_0,\theta_1) $称为**代价函数（Cost Function）**，也成为平方误差代价函数（Square Error Cost Function）。
+则$J(\theta_0,\theta_1) ​$称为**代价函数（Cost Function）**，也成为平方误差代价函数（Square Error Cost Function）。
 
 通过最小化代价函数（通过可视化，找到代价函数的图像的最低点），从而找到最佳的拟合函数。
 
