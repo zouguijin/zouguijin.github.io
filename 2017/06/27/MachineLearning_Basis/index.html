@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Machine Learning - Basis | StarSea</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/font.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- gallery that comes before the header--><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-link" href="/tags/MachineLearning/">MachineLearning</a></div><div class="post-time">2017-06-27</div></div></div><div class="container post-header"><h1>Machine Learning - Basis</h1></div><div class="container post-content"><h2 id="Machine-Learning-基础"><a href="#Machine-Learning-基础" class="headerlink" title="Machine Learning 基础"></a>Machine Learning 基础</h2><h3 id="0-Definition"><a href="#0-Definition" class="headerlink" title="0 Definition"></a>0 Definition</h3><ul>
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Machine Learning - Basis | StarSea</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/font.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- gallery that comes before the header--><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-link" href="/tags/Machine-Learning/">Machine Learning</a></div><div class="post-time">2017-06-27</div></div></div><div class="container post-header"><h1>Machine Learning - Basis</h1></div><div class="container post-content"><h2 id="Machine-Learning-基础"><a href="#Machine-Learning-基础" class="headerlink" title="Machine Learning 基础"></a>Machine Learning 基础</h2><h3 id="0-Definition"><a href="#0-Definition" class="headerlink" title="0 Definition"></a>0 Definition</h3><ul>
 <li>Task：要让机器完成的学习任务；</li>
 <li>Experience：经过学习之后，机器将会获得的经验；</li>
 <li>Performance：机器通过学习得到的经验，处理类似的任务时的性能表现。</li>
@@ -12,11 +12,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Training Set -&gt; Learning Algorithm -&gt; h(hypothesis,假设/函数)</div><div class="line">new input -&gt; h -&gt; estimated output(预测结果)</div></pre></td></tr></table></figure>
 <p>举个栗子：</p>
 <p><strong>线性回归模型</strong></p>
-<p>一个简单的线性回归预测问题，其中$\theta_0$和$\theta_1$是线性拟合直线的两个参数，$i$表示第i个数据，$x^{(i)}$表示第i个数据的输入值，$y^{(i)}$表示第i个数据的输出值，$h_{\theta}(x^{(i)})$表示第I个数据的预测值，为了让拟合的效果最好，即让${(h_\theta(x^{(i)})-y^{(i)})}^2$的结果最小：</p>
-<span>${minimize({\theta_0}{\theta_1})} {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2$</span><!-- Has MathJax -->
-<p>令</p>
-<p>$J(\theta_0,\theta_1) = { 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2$</p>
-<p>则$J(\theta_0,\theta_1) $称为<strong>代价函数（Cost Function）</strong>，也成为平方误差代价函数（Square Error Cost Function）。</p>
+<p>一个简单的线性回归预测问题，其中$\theta_0$和$\theta<em>1$是线性拟合直线的两个参数，$i$表示第i个数据，$x^{(i)}$表示第i个数据的输入值，$y^{(i)}$表示第i个数据的输出值，$h</em>{\theta}(x^{(i)})$表示第I个数据的预测值，为了让拟合的效果最好，即让${(h_\theta(x^{(i)})-y^{(i)})}^2$的结果最小：<br>{% raw %}
+$$
+{minimize({\theta0}{\theta1})} {\ 1\over 2m} {\sum{i=1}^m}{(h\theta(x^{(i)})-y^{(i)})}^2
+$$
+{% endraw %}</p>
+<p>令<br>{% raw %}$$
+J(\theta_0,\theta_1) = {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2
+$${% endraw %}</p>
+<p>则{% raw %}$J(\theta_0,\theta_1)$ {% endraw %}称为<strong>代价函数（Cost Function）</strong>，也成为平方误差代价函数（Square Error Cost Function）。</p>
 <p>通过最小化代价函数（通过可视化，找到代价函数的图像的最低点），从而找到最佳的拟合函数。</p>
 <p><strong>轮廓图（Contour plot）</strong>，即等高线图。</p>
 <p><strong>机器学习，就是需要研究出一种算法，自动地找到最小化代价函数。</strong>而不是人工收集数据，然后将代价函数的曲线，例如轮廓图画出来，再从中寻找最小化的代价函数。</p>
@@ -28,7 +32,7 @@
 <li><p>$\alpha$表示梯度下降的速率，也称为<strong>学习速率</strong>，类似于下山的步子大小，与微分项一起，决定了我们以多快的频率更新$\theta_j$。</p>
 <p>如果学习速率太小，那么收敛的速度会过慢，反之，如果学习速率太大，可能会越过局部最优点或者全局最优点，造成收敛过程的波动，从而造成另一种收敛过慢。</p>
 </li>
-<li><p>微分部分$ \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$，则可以动态地表示函数增长或减少的速率，结合$\alpha$可以动态地调整学习速率，即越接近极值点或局部最优点，学习速率会放慢步子变小，更为细致地接近最优点。</p>
+<li><p>微分部分$\ \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$，则可以动态地表示函数增长或减少的速率，结合$\alpha$可以动态地调整学习速率，即越接近极值点或局部最优点，学习速率会放慢步子变小，更为细致地接近最优点。</p>
 </li>
 </ul>
 <h3 id="1-2-Linear-Algebra-Matrix-amp-Vector（线性代数：矩阵和向量）"><a href="#1-2-Linear-Algebra-Matrix-amp-Vector（线性代数：矩阵和向量）" class="headerlink" title="1.2 Linear Algebra: Matrix &amp; Vector（线性代数：矩阵和向量）"></a>1.2 Linear Algebra: Matrix &amp; Vector（线性代数：矩阵和向量）</h3><ul>
@@ -45,11 +49,11 @@
 </li>
 <li><p>矩阵运算律<br>$$<br>A \times B \neq B \times A<br>$$</p>
 <p>$$<br>(A \times B) \times C = A \times (B \times C)<br>$$</p>
-<p>$$<br>A_{m \times n} \times I_{n \times n} = I_{n \times n} \times A_{m \times n} = A_{m \times n}<br>$$</p>
+<p>$$<br>A<em>{m \times n} \times I</em>{n \times n} = I<em>{n \times n} \times A</em>{m \times n} = A_{m \times n}<br>$$</p>
 </li>
 <li><p>矩阵的逆（Inverse）与转置（Tanspose）</p>
 <p>如果矩阵$A$是一个$m \times m$<strong>方阵</strong>，且<strong>它有逆</strong>，那么满足：<br>$$<br>A(A^{-1}) = A^{-1}A = I_{m \times m}<br>$$<br>没有逆的矩阵称为“<strong>奇异矩阵</strong>”或者“<strong>退化矩阵</strong>”。</p>
-<p>例如，以下矩阵就没有逆：<br>$$<br>A = [ \begin{array}{ccc}<br>0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0 \\<br>\end{array}]<br>$$<br>一个$m \times n$矩阵的转置，是一个$n \times m$矩阵，即：<br>$$<br>if  B = A^T, then  B_{ij} = A_{ji}<br>$$</p>
+<p>例如，以下矩阵就没有逆：<br>$$<br>A = [ \begin{array}{ccc}<br>0 &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 0 \<br>\end{array}]<br>$$<br>一个$m \times n$矩阵的转置，是一个$n \times m$矩阵，即：<br>$$<br>if \ B = A^T,\ then\  B<em>{ij} = A</em>{ji}<br>$$</p>
 </li>
 </ul>
 <h4 id="1-x-Unsupervised-Learning（非监督式学习）"><a href="#1-x-Unsupervised-Learning（非监督式学习）" class="headerlink" title="1.x Unsupervised Learning（非监督式学习）"></a>1.x Unsupervised Learning（非监督式学习）</h4><ul>
@@ -59,7 +63,6 @@
 <ul>
 <li>Others：Reinforcement Learning（强化学习）、Recommender System（推荐系统）</li>
 </ul>
-<p>TEST</p>
 </div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
     $(".fancybox").fancybox();
 });
