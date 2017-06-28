@@ -8,7 +8,7 @@ categories:
 
 tags:
 
-- MachineLearning
+- Machine Learning
 
 ---
 
@@ -41,15 +41,20 @@ new input -> h -> estimated output(预测结果)
 **线性回归模型**
 
 一个简单的线性回归预测问题，其中$\theta_0$和$\theta_1$是线性拟合直线的两个参数，$i$表示第i个数据，$x^{(i)}$表示第i个数据的输入值，$y^{(i)}$表示第i个数据的输出值，$h_{\theta}(x^{(i)})$表示第I个数据的预测值，为了让拟合的效果最好，即让${(h_\theta(x^{(i)})-y^{(i)})}^2$的结果最小：
+{% raw %}{% raw %}
+$$
+{minimize({\theta0}{\theta1})} {\ 1\over 2m} {\sum{i=1}^m}{(h\theta(x^{(i)})-y^{(i)})}^2
+$$
+{% endraw %}{% endraw %}
 
-{% math %}{minimize({\theta_0}{\theta_1})} {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2{% endmath %}
 
 令
+{% raw %}{% raw %}$$
+J(\theta_0,\theta_1) = {\ 1\over 2m} {\sum_{i=1}^m}{(h_\theta(x^{(i)})-y^{(i)})}^2
+$${% endraw %}{% endraw %}
 
-$J(\theta\_0,\theta\_1) = {\ 1\over 2m} {\sum\_{i=1}^m}{(h\_\theta(x^{(i)})-y^{(i)})}^2$
 
-
-则$J(\theta_0,\theta_1) $称为**代价函数（Cost Function）**，也成为平方误差代价函数（Square Error Cost Function）。
+则{% raw %}{% raw %}$J(\theta_0,\theta_1)$ {% endraw %}{% endraw %}称为**代价函数（Cost Function）**，也成为平方误差代价函数（Square Error Cost Function）。
 
 通过最小化代价函数（通过可视化，找到代价函数的图像的最低点），从而找到最佳的拟合函数。
 
@@ -137,6 +142,8 @@ $$
 
 
 
+
+
 #### 1.x Unsupervised Learning（非监督式学习）
 
 - 聚类问题（Cluster），没有样本集合用于学习和训练，直接给定数据集，想方法找出其中蕴含的某种类型结构。
@@ -145,9 +152,3 @@ $$
 
 - Others：Reinforcement Learning（强化学习）、Recommender System（推荐系统）
 
-
-
-
-
-
-TEST
