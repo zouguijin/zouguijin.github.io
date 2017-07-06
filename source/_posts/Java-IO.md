@@ -1,6 +1,6 @@
 title: Java---IO
 
-date: 2017/07/06 10:00:00
+date: 2017/07/02 10:00:00
 
 categories:
 
@@ -134,6 +134,8 @@ Java1.1对基本I/O流进行了重大修改，为了国际化的目的，提供�
 I/O流的用法，本质上可以看成**层层的封装**，通过**使用不同的封装层，可以提供不同的能力**。
 
 一般最内层获取/写出数据，中间层将数据信息转换成String、Byte等类型，最外层则一般会使用具有缓冲区的类，比如BufferedInputStream等具有Buffered的类，一些特殊的需求会要求转换成DataInputStream/DataOutputStream。
+
+在使用I/O流的过程中，需要提供异常捕捉或者抛出机制，最完善的方式当然是为每一次的I/O操作提供异常捕捉机制，最简单的方式则是在**`main()` 方法上给定抛出的异常**，即`throws IOException, ClassCotFoundException` 。
 
 ### 2 I/O流的常用方式
 
@@ -455,6 +457,8 @@ in.close();
 **对象序列化的神奇之处**在于：不仅可以序列化某个对象，还可以同时包含对象内所包含的所有引用，并保存引用所指的那些对象，即类似于链式追踪一样——深度复制（Deep Copy）。
 
 对象序列化的成功实现，必须保证Java虚拟机能够找到相关的**.class文件**。
+
+`writeObject()`和`readObject()` 方法只是用于对象的序列化（包括String对象），**基本类型数据的序列化**也有相应的方法，比如`writeInt()`、`writeByte(int i)`、`writeBytes(String s)` 等。
 
 #### 6.1 序列化的控制
 
