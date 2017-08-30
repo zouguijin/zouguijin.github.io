@@ -14,14 +14,14 @@ tags:
 
 ---
 
-##leetcode#143 Reorder List
+## leetcode#143 Reorder List
 
 >Given a singly linked list L: *L0 L1 … Ln-1 Ln*,
 >reorder it to: *L0 Ln L1 Ln-1 L2 Ln-2*…
 >
 >You must do this in-place without altering the nodes' values.
 
-####解释
+#### 解释
 
 给定单链表，要求对链表进行重新排序，例如：
 
@@ -44,7 +44,7 @@ tags:
 3. 对链表后半部分的指针关系进行反转；
 4. 将链表后半部分的节点插入前半部分，形成交替的分布效果。
 
-####我的解法
+#### 我的解法
 
 ```
 /**
@@ -151,6 +151,6 @@ public void reorderList(ListNode head) {
         }
 ```
 
-####总结
+#### 总结
 
 本题充分说明了基础的重要性，只要基础扎实，善于分解问题，多么复杂的问题都可以抽象成多个基础模块，然后各个击破。
