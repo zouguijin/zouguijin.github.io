@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>leetcode40 Combination Sum II | StarSea</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/font.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- gallery that comes before the header--><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-link" href="/tags/BacktrackingAlgorithm/">BacktrackingAlgorithm</a><a class="post-tag-link" href="/tags/array/">array</a><a class="post-tag-link" href="/tags/leetcode/">leetcode</a></div><div class="post-time">2017-09-25</div></div></div><div class="container post-header"><h1>leetcode40 Combination Sum II</h1></div><div class="container post-content"><h2 id="leetcode-40-Combination-Sum-II"><a href="#leetcode-40-Combination-Sum-II" class="headerlink" title="leetcode#40 Combination Sum II"></a>leetcode#40 Combination Sum II</h2><blockquote>
+<p>Given a collection of candidate numbers (<strong>C</strong>) and a target number (<strong>T</strong>), find all unique combinations in <strong>C</strong> where the candidate numbers sums to <strong>T</strong>.</p>
+<p>Each number in <strong>C</strong> may only be used <strong>once</strong> in the combination.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>All numbers (including target) will be positive integers.</li>
+<li>The solution set must not contain duplicate combinations.</li>
+</ul>
+<p>For example, given candidate set <code>[10, 1, 2, 7, 6, 1, 5]</code> and target <code>8</code>,<br>A solution set is: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;[</div><div class="line">&gt;  [1, 7],</div><div class="line">&gt;  [1, 2, 5],</div><div class="line">&gt;  [2, 6],</div><div class="line">&gt;  [1, 1, 6]</div><div class="line">&gt;]</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h4><p>给定一个候选数字的集合C和一个目标数字T，在C中找出所有加和的结果等于T的<strong>数字组合</strong>，相同的组合只需返回一个即可。</p>
+<ul>
+<li>所有的数字都是正整数；</li>
+<li>相同的组合只能返回一个。</li>
+</ul>
+<h4 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h4><p>最初的思路没有考虑到回溯算法：先将数组元素排序，然后将小于T的数组元素存储进HashMap（Key：数组元素值，Value：该元素的出现次数），然后依次查找——有一个直接的问题就是，组合可能包含大于两个的数组元素，所以第一次作差得到的结果不一定是HashMap的Key值，所以还需要后续多重比较，很是麻烦…</p>
+<p>没有考虑到回溯算法，其实是因为对回溯算法的脑回路不是很理解，实现起来的套路也不是很懂…</p>
+<h4 id="大神解法"><a href="#大神解法" class="headerlink" title="大神解法"></a>大神解法</h4><p><strong>回溯算法（Backtracking）</strong> </p>
+<p>同样需要先对数组元素进行排序，然后提供一个额外的<strong>递归算法</strong> ——对数组元素进行深度优先（DFS）遍历操作：</p>
+<ul>
+<li>在遍历的过程中，每找到一个小于T的数组元素，都将其加入链表，然后作差，然后将差值作为新的T值，继续递归；</li>
+<li>若刚好T为零，说明找到了一组数字组合（满足加和结果），将当前的链表作为一个结果添加到链表容器中；</li>
+<li>若作差后新的T值小于零，则说明这个组合不正确，单纯返回；</li>
+<li>若作差后，新的T值大于零，说明前几个数组元素的累加值还没有超过T，作差得到新的T值，继续将后续元素加入链表；</li>
+<li>每完成一次递归（不论是成功找到一个组合，还是作差后新的T值小于零），都将往<strong>后退一步</strong>（即将前一个元素删除），然后循环变量加1，取下一个元素，以此类推。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"> public List&lt;List&lt;Integer&gt;&gt; combinationSum2(int[] cand, int target) &#123;</div><div class="line">    Arrays.sort(cand);</div><div class="line">    List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;List&lt;Integer&gt;&gt;();</div><div class="line">    List&lt;Integer&gt; path = new ArrayList&lt;Integer&gt;();</div><div class="line">    dfs_com(cand, 0, target, path, res);</div><div class="line">    return res;</div><div class="line">&#125;</div><div class="line">void dfs_com(int[] cand, int cur, int target, List&lt;Integer&gt; path, List&lt;List&lt;Integer&gt;&gt; res) &#123;</div><div class="line">    if (target == 0) &#123;</div><div class="line">        res.add(new ArrayList(path));</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line">    if (target &lt; 0) return;</div><div class="line">    for (int i = cur; i &lt; cand.length; i++)&#123;</div><div class="line">        if (i &gt; cur &amp;&amp; cand[i] == cand[i-1]) continue;</div><div class="line">        path.add(path.size(), cand[i]);</div><div class="line">        dfs_com(cand, i+1, target - cand[i], path, res);</div><div class="line">        // 在dfs_com()的某一层，如果遍历了数组中所有的元素：0~cand.length，且都不满足条件，最后dsf_com()将会“无功而返”——什么都不返回地结束这一层的递归操作，回到上一层</div><div class="line">        path.remove(path.size()-1);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>总的来说，回溯算法求解过程，就类似于一个<strong>贪婪“尝试”</strong>的过程，当前尝试的结果满足条件，就接受，接着尝试下一个，否则就<strong>后退一步</strong>，尝试另外一个结果。</p>
+<p>所以，<strong>回溯的关键</strong>有以下几点：</p>
+<ul>
+<li>回溯边界条件的判定——什么时候回溯返回，也即什么时候“后退”尝试其他的情况；</li>
+<li>回溯过程——回溯需要完成什么操作；</li>
+<li>回溯的返回——回溯返回之后，接下来该做什么，需要处理什么，是更改变量接着回溯还是就此结束。</li>
+</ul>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
