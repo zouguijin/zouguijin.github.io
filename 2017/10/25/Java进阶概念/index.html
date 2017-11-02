@@ -1,0 +1,144 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Java进阶概念 | StarSea</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/font.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"></head><body><!-- gallery that comes before the header--><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-link" href="/tags/JavaAdvanced/">JavaAdvanced</a></div><div class="post-time">2017-10-25</div></div></div><div class="container post-header"><h1>Java进阶概念</h1></div><div class="container post-content"><h2 id="Java进阶概念"><a href="#Java进阶概念" class="headerlink" title="Java进阶概念"></a>Java进阶概念</h2><blockquote>
+<p>介绍Java的一些进阶概念和内容。</p>
+</blockquote>
+<h3 id="回调机制"><a href="#回调机制" class="headerlink" title="回调机制"></a>回调机制</h3><p>在应用开发中，特别是模块开发中，经常存在模块之间的调用，其中调用的方式有：</p>
+<ul>
+<li><p>同步调用</p>
+<p>A的方法a()调用B的方法b()，一直等待b()方法完成后，a()才会继续往下走。</p>
+<p>这种调用方式适用于方法b()执行时间不长的情况，否则会引起a()的阻塞。</p>
+</li>
+<li><p>异步调用</p>
+<p>类A的方法方法a()通过新起线程的方式调用类B的方法b()，代码接着直接往下执行。</p>
+<p>异步调用是为了解决同步调用可能出现阻塞，导致整个流程卡住而产生的一种调用方式。但是这种方式，由于方法a()不等待方法b()的执行完成，在方法a()需要方法b()执行结果的情况下（视具体业务而定，有些业务比如启异步线程发个微信通知、刷新一个缓存这种就没必要），必须通过一定的方式对方法b()的执行结果进行监听——在Java中，可以使用Future+Callable的方式做到这一点。</p>
+</li>
+<li><p>回调</p>
+<p>首先，类A的a()方法调用类B的b()方法；然后，类B的b()方法执行完毕后，主动调用类A的callback()方法，将结果返回给A。</p>
+<p>所以回调机制中，既不需要等待，也不需要监听，只需要一个回调接口并让A实现该接口，然后在B中利用接口对象调用A中所实现的接口方法即可。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Spring-AOP基本概念"><a href="#Spring-AOP基本概念" class="headerlink" title="Spring  AOP基本概念"></a>Spring  AOP基本概念</h3><ul>
+<li>通知、增强处理（Advice）：指你所需要的功能，也就是业务逻辑之外的安全、事务、日志等。需要事先定义好，然后再在想用的地方用一下。（包含Aspect的一段处理代码）</li>
+<li>连接点（JoinPoint） ：指spring允许你设置通知（Advice）的地方，基本上每个方法的前、后（两者都有也行），或抛出异常时都可以是连接点，spring只支持方法连接点。其他如AspectJ还可以在构造器或属性注入时设置连接点，只要记住，<strong>和方法有关的前前后后都是连接点</strong>。</li>
+<li>切入点（Pointcut）：在连接点的基础上，可以进一步定义切入点，一个类里可能会有十几个方法，那就会相应的有十几个连接点，但是可能你并不想在所有方法的附近都使用通知（使用的时候叫织入，见下），你<strong>只是想在其中的几个连接点使用通知</strong>，在调用这几个方法之前、之后或者抛出异常时干点什么，那么就用切入点来定义这几个方法。</li>
+<li>切面（Aspect）：通知和切入点的结合，通知说明了干什么和什么时候干（什么时候通过方法名中的befor，after，around等就能知道），而切入点则是为了说明在哪干（指定到底是哪个方法）——即Advisor（通知器），将通知和切入点相结合。</li>
+<li>引入（Introduction）：允许我们向现有的类中添加新方法属性。即，将切面（也就是新方法属性：通知定义的）添加到目标类中。</li>
+<li>目标（Target） ：即目标类，就是要被通知的对象，也就是真正需要处理的业务逻辑。目标类可以在毫不知情的情况下，被织入切面，即添加新功能，而目标类本身只需要专注于业务逻辑本身即可。</li>
+<li>代理（Proxy）：整套AOP机制都是通过代理来实现的。</li>
+<li>织入（Weaving）：指把切面应用到目标对象中来创建新的代理对象的过程。织入有三种方式，spring采用的是运行时织入。</li>
+<li>目标对象：项目原始的Java组件。</li>
+<li>AOP代理：由AOP框架生成Java对象。</li>
+<li>AOP代理方法 = Advice + 目标对象的方法。</li>
+</ul>
+<hr>
+<h3 id="Spring-AOP的两种代理模式"><a href="#Spring-AOP的两种代理模式" class="headerlink" title="Spring  AOP的两种代理模式"></a>Spring  AOP的两种代理模式</h3><ul>
+<li><p>实现与目标类相同的接口（兄弟模式）</p>
+<p>基于反射机制，Spring使用JDK的java.lang.reflect.Proxy类，动态生成一个新的类实现目标类的接口，并在新类中织入相应的通知，之后对于该接口的调用都将转发给目标类进行处理；</p>
+<p><code>Proxy.newProxyInstance(classLoader, proxiedInterfaces, this);</code></p>
+<p><code>this</code> 对应InvocationHandler对象——JDK定义的反射类接口，该接口定义<code>invoke()</code> 方法——<code>invoke()</code> 方法是代理对象的回调方法——拦截的时候将会调用<code>invoke()</code> 方法，通过该方法的具体实现可以为目标对象方法织入切面。</p>
+</li>
+<li><p>生成子类的调用（父子模式）</p>
+<p>Spring使用CGLIB库生成目标类的一个子类，并在创建子类的时候织入通知，之后对于目标类的调用都将转发给子类处理。</p>
+<p><code>Callback aopInterceptor = new DynamicAdvisedInterceptor(this.advised);</code></p>
+<p>在CGLIB的回调中，AOP的实现是通过DynamicAdvisedInterceptor拦截器来完成的——回调的入口为<code>intercept()</code> ——在该方法中，将会通过CglibMethodInvocation启动advice通知。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Spring-AOP拦截与拦截器的调用"><a href="#Spring-AOP拦截与拦截器的调用" class="headerlink" title="Spring  AOP拦截与拦截器的调用"></a>Spring  AOP拦截与拦截器的调用</h3><p>虽然AOP有两种代理模式，但是AOP对于拦截器链的调用都是在ReflectiveMethodInvocation中由<code>proceed()</code> 方法实现的——<code>proceed()</code> 方法将在<strong>匹配</strong>代理方法之后，会逐个运行拦截器的拦截方法——<code>proceed()</code> 将会迭代进行，直到拦截器链中的拦截器都完成拦截过程为止。</p>
+<p>如何获取拦截器？当然是先获取拦截器链了。那么如何获取拦截器链？——通过<code>advised</code> 对象完成：</p>
+<p><code>List&lt;Object&gt; chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);</code> </p>
+<p>该方法的调用会实际调用<code>advisorChainFactory</code> 的同名方法：</p>
+<p><code>List&lt;Object&gt; cached = this.advisorChainFactory.getInterceptorsAndDynamicInterceptionAdvice(this, method, targetClass);</code> </p>
+<p>在上述方法中，将会完成拦截器的适配和注册。</p>
+<p><strong>具体的实现</strong>是，上述方法将关于通知的配置信息<code>Advised</code>由参数对象的方式（应该就是<code>this</code>）从外传递方法内——通过<code>advised.getAdvisors()</code> 方法提取相应的通知器Advisor——由GlobalAdvisorAdapterRegistry的单例对象调用<code>getInterceptors()</code> 方法从通知器Advisor中提取出通知本身Advice——由实现了AdvisorAdapter接口的类对通知Advice进行适配（即判断该通知是需要织入在目标方法之前还是之后还是ThrowAdvice，该过程会有相应的正则匹配），在适配的过程中，将把通知封装入对应的拦截器中，从而完成通知的适配和注册——之后调用目标方法的时候，将会回调拦截器，并在拦截器中完成通知的增强功能和原方法的功能。</p>
+<hr>
+<h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><p>ACID属性：</p>
+<ul>
+<li>原子性（Atomicity）</li>
+<li>一致性（Consistancy）</li>
+<li>隔离性（Isolation）</li>
+<li>持久性（Durability）</li>
+</ul>
+<hr>
+<h3 id="Spring-事务处理"><a href="#Spring-事务处理" class="headerlink" title="Spring 事务处理"></a>Spring 事务处理</h3><ul>
+<li><p>TransactionProxyFactoryBean</p>
+<p>使用AOP生成Proxy代理对象。</p>
+</li>
+<li><p>TransactionInterceptor</p>
+<p>事务拦截器，用于切面增强的织入。</p>
+</li>
+<li><p>AbstractPlatformTransactionManager</p>
+<p>适配和管理多种不同的底层数据库。</p>
+</li>
+</ul>
+<h4 id="声明式事务"><a href="#声明式事务" class="headerlink" title="声明式事务"></a>声明式事务</h4><p>从Spring的角度可以这么看：</p>
+<ul>
+<li><p>准备阶段</p>
+<p>为事务处理配置好AOP的基础设施（Proxy代理对象和拦截器对象）——读取事务属性配置（由TransactionInterceptor完成）——完成事务处理的准备工作。</p>
+</li>
+<li><p>事务处理阶段</p>
+<ul>
+<li><p>TransactionInfo对象</p>
+<p>类似于一个栈，对应于每一次事务方法的调用（事务的创建与提交），保存着每一次事务方法调用的事务处理信息，通过与线程的绑定实现事务的隔离性（与线程的ThreadLocal变量进行绑定）。</p>
+</li>
+<li><p>TransactionStatus对象</p>
+<p>也是TransactionInfo对象的一个属性，管理着事务执行的详细信息，包括具体的事务对象、事务执行状态、事务设置状态等。</p>
+</li>
+<li><p>TransactionManager</p>
+<p>事务具体的处理，包括创建（Begin）、提交（Submit）、挂起（Suspend）、回滚（Rollback）等具体处理动作，都使用TransactionManager下具体的事务处理器完成的，比如DataSourceTransactionManager和HibernateTransactionManager等。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="编程式事务"><a href="#编程式事务" class="headerlink" title="编程式事务"></a>编程式事务</h4><p>编程式的事务处理看上去显得较为简单：</p>
+<ul>
+<li><p>TransactionDefinition</p>
+<p>持有事务的属性。</p>
+</li>
+<li><p>TransactionStatus</p>
+<p>保存事物的状态。</p>
+</li>
+<li><p>TransactionManager</p>
+<p>管理事务的具体处理过程，包括提交和回滚。</p>
+</li>
+</ul>
+<p>其中，不像声明式事务一样，在初期有复杂的准备工作（需要准备阶段的各种配置和读取操作），但是正因为与AOP结合使用，正因为将事务的配置和处理过程与应用业务逻辑分离，才完成了应用与具体数据源之间的解耦，反观编程式事务处理，虽然初期简单，但是却容易在持续的开发中导致事务处理与业务逻辑的紧耦合。</p>
+<hr>
+<h3 id="关于JDBC的一些概念"><a href="#关于JDBC的一些概念" class="headerlink" title="关于JDBC的一些概念"></a>关于JDBC的一些概念</h3><h4 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h4><p>数据库的四大操作：</p>
+<ul>
+<li>Create，创建；</li>
+<li>Update，更新；</li>
+<li>Research，查询；</li>
+<li>Delete，删除。</li>
+</ul>
+<h4 id="JDBC与驱动"><a href="#JDBC与驱动" class="headerlink" title="JDBC与驱动"></a>JDBC与驱动</h4><p>Java Database Connectivity，是标准的Java API，是一套客户端与数据库交互的规范，JDBC提供了一套通过Java操纵数据库的完整接口。</p>
+<p>JDBC的实现，需要JDBC驱动程序支持，不同的数据库对应有着不同的驱动程序（对应的需要将不同的驱动Jar包导入项目中）。调用JDBC API的时候，JDBC将调用请求交给JDBC驱动，最终在驱动程序的作用下完成与数据库的交互，包括开启数据库连接、关闭数据库连接以及事务的控制。</p>
+<h4 id="JDBC-API的重要接口与类"><a href="#JDBC-API的重要接口与类" class="headerlink" title="JDBC API的重要接口与类"></a>JDBC API的重要接口与类</h4><ul>
+<li>DriverManager： 该类用来管理数据库驱动程序，当需要建立一个连接时，DriverManager将使用第一个满足要求的Driver来建立连接。</li>
+<li>Driver：该接口负责处理所有与数据库的交互。</li>
+<li><strong>Connection</strong> ： 该接口表示一次数据库连接。<strong>所有的数据库操作都是在一次数据库连接中进行的</strong>，连接关闭后，将不能再进行数据库操作。</li>
+<li><strong>Statement</strong>： 我们可以通过该接口<strong>执行SQL语句</strong>，并得到返回结果。</li>
+<li>ResultSet： 通过Statement执行查询语句后，我们将得到类型为ResultSet的返回结果。该结果是一个<strong>迭代器</strong>，存储了所有查询返回的数据。</li>
+<li>SQLException： 这个类处理的数据库应用程序中发生的任何错误。</li>
+</ul>
+<p>JDBC默认将<code>auto-commit</code> 置为<code>true</code> ，这种情况下：</p>
+<ul>
+<li>Connection与Statement之间有一层Transaction（事务）；</li>
+<li>一个Connection可以进行多个Transaction；</li>
+<li>一个Transaction可以包含多条Statement；</li>
+<li>每一条Statement都是一个Transaction。</li>
+</ul>
+<p>一般不建议每次CRUD的时候都建立新的Connection（Connection占用底层资源，比如Socket，所以需要限制Connection的数量），也不建议使用共享的单例Connection（不应该在多个线程之间共享Connection，可能会导致效率的下降和线程安全性问题）。</p>
+<p>所以，<strong>每个线程应该使用独立的Connection，但在线程之内共享同一个Connection</strong>——最简单的实现是：创建一个Connection，将其与一个线程绑定，并将该Connection的引用存放在该线程的<strong>ThreadLocal</strong>变量之中，在线程结束时关闭Connection。</p>
+<p>更好一点的实现是使用数据库连接池。</p>
+<h4 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h4><p>基本思想是，为数据库连接建立一个缓冲池，预先放入一定数量的连接Connection。当需要使用Connection的时候，直接从缓冲池中取出即可，使用完毕再将Connection放回缓冲池中。从而解决“重复且频繁地打开和关闭Connection”以及“Connection数量过多”带来的数据库和系统性能和稳定性下降的问题。</p>
+<h4 id="简单的JDBC过程"><a href="#简单的JDBC过程" class="headerlink" title="简单的JDBC过程"></a>简单的JDBC过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">onnection con = null;</div><div class="line">Statement stmt ＝null;</div><div class="line"></div><div class="line">try &#123;</div><div class="line">    // 1、加载MYSQL驱动，这是`Driver`的实现，MySQL的JDBC驱动类是com.mysql.jdbc.Driver</div><div class="line">    Class.forName(&quot;com.mysql.jdbc.Driver&quot;).newInstance(); </div><div class="line"></div><div class="line">    // 2、连接到MYSQL，通过`DriverManger`来操作`Driver`，获取数据库连接</div><div class="line">    con = DriverManager.getConnection(&quot;jdbc:mysql://127.0.0.1:3306/tianmayingblog&quot;, &quot;root&quot;, &quot;&quot;); </div><div class="line"></div><div class="line">    // 3、创建用以执行SQL语言的声明</div><div class="line">    Statement stmt = con.createStatement();</div><div class="line"></div><div class="line">    // 4、执行SQL，获取结果</div><div class="line">    ResultSet rs = stmt.executeQuery(&quot;select * from `user`&quot;);</div><div class="line"></div><div class="line">    // 5、遍历并解析结果</div><div class="line">    while (rs.next()) &#123;</div><div class="line">        long id = rs.getLong(&quot;id&quot;);</div><div class="line">        // ...</div><div class="line">    &#125;</div><div class="line">&#125; catch (Exception e) &#123;</div><div class="line"></div><div class="line">    // 如果有异常，进行异常处理</div><div class="line">    System.out.print(&quot;MYSQL ERROR:&quot; + e.getMessage());</div><div class="line"></div><div class="line">&#125; finally &#123;</div><div class="line">    // 6、关闭连接与声明</div><div class="line">    try &#123;</div><div class="line">        if (stmt != null) &#123;</div><div class="line">            stmt.close();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (con != null) &#123;</div><div class="line">            con.close();</div><div class="line">        &#125;</div><div class="line">    &#125; catch (SQLException ignored) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="Hibernate"><a href="#Hibernate" class="headerlink" title="Hibernate"></a>Hibernate</h3><p>一个基于Java的对象/关系数据库映射工具——将对象模型表示的数据映射到SQL表示的关系模型。</p>
+<p>Hibernate管理Java-数据库之间的映射关系，提供关于数据库的CURD等操作，简化了对于<a href="#DataPersistenceLayer">数据持久化层</a>的编程任务。</p>
+<hr>
+<h3 id="ORM与数据持久化"><a href="#ORM与数据持久化" class="headerlink" title="ORM与数据持久化"></a>ORM与数据持久化</h3><p><span id="DataPersistenceLayer"></span></p>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
